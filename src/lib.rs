@@ -362,6 +362,16 @@ pub enum HexColorError {
     Char(char),
 }
 
+impl std::fmt::Display for Srgba{
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let [r, g, b, a] = self.to_u8_array();
+        match a {
+            255 => write!(f,"#{r:02X}{g:02X}{b:02X}"),
+            _ => write!(f, "#{r:02X}{g:02X}{b:02X}{a:02X}"),
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
 
