@@ -243,7 +243,7 @@ impl Default for Srgba {
 
 impl Srgba {
     #[inline]
-    pub fn mix(&self, other: &Self, factor: f32) -> Self {
+    pub const fn mix(&self, other: &Self, factor: f32) -> Self {
         let n_factor = 1.0 - factor;
         Self {
             red: self.red * n_factor + other.red * factor,
@@ -254,37 +254,37 @@ impl Srgba {
     }
 
     #[inline]
-    pub fn with_alpha(&self, alpha: f32) -> Self {
+    pub const fn with_alpha(&self, alpha: f32) -> Self {
         Self { alpha, ..*self }
     }
 
     #[inline]
-    pub fn alpha(&self) -> f32 {
+    pub const fn alpha(&self) -> f32 {
         self.alpha
     }
 
     #[inline]
-    pub fn set_alpha(&mut self, alpha: f32) {
+    pub const fn set_alpha(&mut self, alpha: f32) {
         self.alpha = alpha;
     }
 
     #[inline]
-    pub fn distance_squared(&self, other: &Self) -> f32 {
+    pub const fn distance_squared(&self, other: &Self) -> f32 {
         let dr = self.red - other.red;
         let dg = self.green - other.green;
         let db = self.blue - other.blue;
         dr * dr + dg * dg + db * db
     }
 
-    pub fn to_f32_array(self) -> [f32; 4] {
+    pub const fn to_f32_array(self) -> [f32; 4] {
         [self.red, self.green, self.blue, self.alpha]
     }
 
-    pub fn to_f32_array_no_alpha(self) -> [f32; 3] {
+    pub const fn to_f32_array_no_alpha(self) -> [f32; 3] {
         [self.red, self.green, self.blue]
     }
 
-    pub fn from_f32_array(color: [f32; 4]) -> Self {
+    pub const fn from_f32_array(color: [f32; 4]) -> Self {
         Self {
             red: color[0],
             green: color[1],
@@ -293,7 +293,7 @@ impl Srgba {
         }
     }
 
-    pub fn from_f32_array_no_alpha(color: [f32; 3]) -> Self {
+    pub const fn from_f32_array_no_alpha(color: [f32; 3]) -> Self {
         Self {
             red: color[0],
             green: color[1],
@@ -302,11 +302,11 @@ impl Srgba {
         }
     }
 
-    pub fn to_vec4(self) -> Vec4 {
+    pub const fn to_vec4(self) -> Vec4 {
         Vec4::new(self.red, self.green, self.blue, self.alpha)
     }
 
-    pub fn to_vec3(self) -> Vec3 {
+    pub const fn to_vec3(self) -> Vec3 {
         Vec3::new(self.red, self.green, self.blue)
     }
 
